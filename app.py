@@ -59,9 +59,11 @@ def auth(tocken=get_token()) -> str:
 def main():
     print(auth())
     print('Press [Ctrl]+[C] for exit')
+    time.sleep(5)
 
 try:
     main()
-    time.sleep(5)
 except KeyboardInterrupt:
     exit()
+except AttributeError:
+    print('Set login and password')
