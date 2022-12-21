@@ -2,10 +2,12 @@ import requests
 from bs4 import BeautifulSoup
 import html
 import time
+from dotenv import dotenv_values
 
+env = dotenv_values('.env')
 
-# Введите свой логин и пароль  v                       v
-credentials = {'sUsername': 'login', 'sPassword': 'password'}
+# Введите свой логин и пароль в файле '.env'
+credentials = {'sUsername': env.get('LOGIN'), 'sPassword': env.get('PASSWORD')}
 
 requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS = 'ALL:@SECLEVEL=1'
 session = requests.Session()
