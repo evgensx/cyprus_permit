@@ -39,27 +39,15 @@ def auth(tocken=get_token()) -> str:
     _soup = BeautifulSoup(html.unescape(_response.text), "xml")
     _stage = _soup.ProcessID.string
 
-    progress = {'IK001': 'Initialisation', 'IK002': '1/7 Application', 'IK100': '2/7 Document Upload',
-                'IK150': '3/7 Police', 'IK070': '4/7 State Hospital', 'IK300': '60% 5/7 Immigration Office'}
-    match _stage:
-        case 'IK001':
-            return f'Progress: {progress["IK001"]}'
-        case 'IK002':
-            return f'Progress: {progress["IK002"]}'
-        case 'IK100':
-            return f'Progress: {progress["IK100"]}'
-        case 'IK150':
-            return f'Progress: {progress["IK150"]}'
-        case 'IK070':
-            return f'Progress: {progress["IK070"]}'
-        case 'IK300':
-            return f'Progress: {progress["IK300"]}'
-        case _:
-            return f'New stage! {_stage}'
-
+    _progress = {'IK001': 'Initialisation', 'IK002': '1/7 Application', 'IK100': '2/7 Document Upload',
+                 'IK150': '3/7 Police', 'IK070': '4/7 State Hospital', 'IK300': '60% 5/7 Immigration Office'}
+    if _stage in _progress.keys():
+        return(_progress.get(_stage))
+    else:
+        return(f'New stage is {_stage}!')
 
 def main():
-    print(auth())
+    print('Progress:', auth())
     print('Press [Ctrl]+[C] for exit')
     time.sleep(5)
 
